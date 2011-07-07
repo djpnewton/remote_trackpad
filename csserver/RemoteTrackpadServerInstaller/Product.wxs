@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi"
+     xmlns:netfx="http://schemas.microsoft.com/wix/NetFxExtension">
+  <Product Id="430bdf96-0b82-48bd-bdaf-7f61c9aae9cc" Name="Remote Trackpad Server" Language="1033" Version="1.0.0.0" Manufacturer="DJP" UpgradeCode="db3a65dd-eea4-457d-80f3-20cea0fc5e3b">
+    <Package InstallerVersion="200" Compressed="yes" />
+    <Media Id="1" Cabinet="media1.cab" EmbedCab="yes" />
+    <PropertyRef Id="NETFRAMEWORK35"/>
+    <Condition Message="This application requires .NET Framework 3.5. Please install the .NET Framework then run this installer again.">
+      <![CDATA[Installed OR NETFRAMEWORK35]]>
+    </Condition>
+    
+    <!-- Define the directory structure -->
+    <Directory Id="TARGETDIR" Name="SourceDir">
+      <Directory Id="ProgramFilesFolder">
+        <Directory Id="INSTALLLOCATION" Name="Remote Trackpad Server" />
+      </Directory>
+      <Directory Id="ProgramMenuFolder">
+        <Directory Id="ApplicationProgramsFolder" Name="Remote Trackpad Server"/>
+      </Directory>      
+    </Directory>
+
+    <!-- Add files to your installer package -->
+    <DirectoryRef Id="INSTALLLOCATION">
+      <Component Id="MainExecutable" Guid="b59b7c6a-f3f2-4c91-9f45-0b56ac840085">
+        <File Id='RemoteTrackpadServerEXE'
+              Name='RemoteTrackpadServer.exe'
+              DiskId='1'
+              KeyPath='yes'
+              Source='$(var.SolutionDir)\RemoteTrackpadServer\$(var.OutDir)\RemoteTrackpadServer.exe' />
+      </Component>
+      <Component Id="Assemblies" Guid="0B48176A-6A0E-4300-A59F-27974536558A">
+          <File Source='$(var.SolutionDir)\RemoteTrackpadServer\$(var.OutDir)\InputServer.dll' />
+        <File Source='$(var.SolutionDir)\RemoteTrackpadServer\$(var.OutDir)\Bespoke.Common.dll' />
+        <File Source='$(var.SolutionDir)\RemoteTrackpadServer\$(var.OutDir)\Bespoke.Common.Osc.dll' />
+        <File Source='$(var.SolutionDir)\RemoteTrackpadServer\$(var.OutDir)\InputSimulator.dll' />
+      </Component>
+    </DirectoryRef>
+
+    <!-- Add the shortcut to your installer package -->
+    <DirectoryRef Id="ApplicationProgramsFolder">
+      <Component Id="ApplicationShortcut" Guid="70CF4938-4EAB-4CB6-8359-26B9D07C208A">
+        <Shortcut Id="ApplicationStartMenuShortcut"
+            Name="Remote Trackpad Server"
+            Description="???"
+            Target="[INSTALLLOCATION]RemoteTrackpadServer.exe"
+            WorkingDirectory="INSTALLLOCATION"/>
+        <Shortcut Id="UninstallProduct"
+                  Name="Uninstall Remote Trackpad Server"
+                  Description="Uninstalls Remote Trackpad Server"
+                  Target="[System64Folder]msiexec.exe"
+                  Arguments="/x [ProductCode]"/>
+        <RemoveFolder Id="ApplicationProgramsFolder" On="uninstall"/>
+        <RegistryValue Root="HKCU" Key="Software\Microsoft\RemoteTrackpadServer" Name="installed" Type="integer" Value="1" KeyPath="yes"/>
+      </Component>
+    </DirectoryRef>
+
+    <!-- Auto-start via Registry -->
+    <Property Id="StartViaRegistry">1</Property>
+    <DirectoryRef Id="INSTALLLOCATION">
+      <Component Id="RemoteTrackpadServerAutostart" Guid="AFB42A14-E201-4DE5-9816-47A024209F9E" >
+        <RegistryKey Root="HKMU" Action="none" Key="Software\Microsoft\Windows\CurrentVersion\Run">
+          <RegistryValue Action ="write" Name="Remote Trackpad Server"
+                         Value="[INSTALLLOCATION]RemoteTrackpadServer.exe"
+                         Type="string" />
+        </RegistryKey>
+        <Condition>StartViaRegistry</Condition>
+      </Component>
+    </DirectoryRef>
+
+    <!-- Add UI to your installer / Trigger the custom launch action -->
+    <UI>
+      <UIRef Id="WixUI_FeatureTree" />
+      <!-- add launch app checkbox on exit dialog -->
+      <Publish Dialog="ExitDialog"
+          Control="Finish"
+          Event="DoAction"
+          Value="LaunchApplication">WIXUI_EXITDIALOGOPTIONALCHECKBOX = 1 and NOT Installed</Publish>
+    </UI>
+    <Property Id="WIXUI_EXITDIALOGOPTIONALTEXT" Value="Remember to allow Remote Trackpad Server through the firewall!" />
+    <Property Id="WIXUI_EXITDIALOGOPTIONALCHECKBOXTEXT" Value="Launch Remote Trackpad Server" />
+
+    <!-- Include the custom launch action -->
+    <Property Id="WixShellExecTarget" Value="[#RemoteTrackpadServerEXE]" />
+    <CustomAction Id="LaunchApplication"
+        BinaryKey="WixCA"
+        DllEntry="WixShellExec"
+        Impersonate="yes" />
+
+    <!-- Tell WiX to install the files etc -->
+    <Feature Id='Base' Level='1' Title='Remote Trackpad Server Files'
+             Description='The required files for the execution of Remote Trackpad Server.'
+             ConfigurableDirectory='INSTALLLOCATION' Absent='disallow'>
+      <ComponentRef Id='MainExecutable' />
+      <ComponentRef Id='Assemblies' />
+      <ComponentRef Id='ApplicationShortcut' />
+    </Feature>
+    <Feature Id='Autostart' Level='1' Title='Auto-run on user login'
+             Description='Configure Remote Trackpad Server to run when the user logs in.'
+             Absent='allow'>
+      <ComponentRef Id='RemoteTrackpadServerAutostart' />
+    </Feature>
+
+  </Product>
+</Wix>

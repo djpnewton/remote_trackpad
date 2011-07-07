@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Remote</string>
+    <string name="trackpad">Trackpad</string>
+    <string name="trackpad_settings">Trackpad Settings</string>
+    <string name="tap_to_click">Tap to Click</string>
+    <string name="double_tap_and_drag">Double Tap and Drag</string>
+    <string name="two_finger_tap_right_click">Two Finger Tap Right Click</string>
+    <string name="two_finger_drag_scroll">Two Finger Drag Scroll</string>
+    <string name="show_buttons">Show Buttons</string>
+    <string name="landscape">Landscape Orientation</string>
+    <string name="connection_settings">Connection Settings</string>
+    <string name="handshake_first">Confirm handshake with server before starting trackpad</string>
+    <string name="handshake_failed">Server handshake failed</string>
+    <string name="server_hostname">Server Hostname</string>
+    <string name="find_server">Find server</string>
+    <string name="found_server">Found server</string>
+    <string name="wifi_not_enabled">Wifi not enabled</string>
+    <string name="enable_wifi">Enable Wifi</string>
+    <string name="failed_to_enable_wifi">Failed to enable Wifi</string>
+    <string name="test_touch_view">Test TouchView</string>
+    <string name="gamepad">Gamepad</string>
+    <string name="send_msg_io_exception">Error sending message to server. Is Wifi connected?</string>
+    <string name="failed_to_discover_server">Failed to discover server</string>
+</resources>
