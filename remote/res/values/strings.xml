@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Remote</string>
+    <string name="app_name">Remote Trackpad</string>
     <string name="trackpad">Trackpad</string>
     <string name="trackpad_settings">Trackpad Settings</string>
     <string name="tap_to_click">Tap to Click</string>
