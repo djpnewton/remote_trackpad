@@ -4,9 +4,10 @@ import java.net.InetAddress;
 import java.net.SocketException;
 import java.net.UnknownHostException;
 
+import net.robotmedia.billing.AbstractBillingActivity;
+
 import com.djpsoft.remote.R;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -20,13 +21,14 @@ import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
 import android.widget.Toast;
 
-public class RemoteSetup extends Activity {
+public class RemoteSetup extends AbstractBillingActivity {
 
     private static final String TAG = "RemoteSetup";
 
     public static final String PREFS_NAME = "VIRTUAL_INPUT_PREFS";
     public static final String HANDSHAKE_FIRST = "HANDSHAKE_FIRST";
     public static final String HOSTNAME = "HOSTNAME";
+    public static final String PRO_FUNCTIONS = "android.test.purchased";
 
     public static OSCClient oscClient = null;
 
@@ -212,6 +214,13 @@ public class RemoteSetup extends Activity {
                 }
             }
         });
+        btn = (Button) findViewById(R.id.go_pro);
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                requestPurchase(PRO_FUNCTIONS);
+            }
+        });
     }
 
     private void loadPrefs() {
@@ -273,5 +282,53 @@ public class RemoteSetup extends Activity {
             oscClient = null;
             Log.e(TAG, "createOscClient: UnknownHostException");
         }
+    }
+
+    @Override
+    public void onBillingChecked(boolean supported) {
+        if (supported) {
+            Button btn = (Button) findViewById(R.id.go_pro);
+            btn.setVisibility(View.VISIBLE);
+        }
+    }
+
+    @Override
+    public void onPurchaseCancelled(String itemId) {
+    }
+
+    @Override
+    public void onPurchaseExecuted(String itemId) {
+        if (itemId == PRO_FUNCTIONS) {
+            // Show pro functions
+            Button btn = (Button) findViewById(R.id.send_ping);
+            btn.setVisibility(View.VISIBLE);
+            // Hide upgrade button
+            btn = (Button) findViewById(R.id.go_pro);
+            btn.setVisibility(View.GONE);
+        }
+    }
+
+    @Override
+    public void onPurchaseRefunded(String itemId) {
+        if (itemId == PRO_FUNCTIONS) {
+            // Hide pro functions
+            Button btn = (Button) findViewById(R.id.send_ping);
+            btn.setVisibility(View.GONE);
+            // Show upgrade button
+            btn = (Button) findViewById(R.id.go_pro);
+            btn.setVisibility(View.VISIBLE);
+        }
+    }
+
+    @Override
+    public byte[] getObfuscationSalt() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public String getPublicKey() {
+        // TODO Auto-generated method stub
+        return null;
     }
 }

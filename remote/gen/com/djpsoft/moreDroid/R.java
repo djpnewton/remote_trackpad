@@ -129,8 +129,9 @@ containing a value of this type.
     public static final class id {
         public static final int double_tap_and_drag=0x7f080003;
         public static final int enable_wifi=0x7f08000b;
-        public static final int go_gamepad=0x7f08000d;
-        public static final int go_testtouch=0x7f08000c;
+        public static final int go_gamepad=0x7f08000e;
+        public static final int go_pro=0x7f08000c;
+        public static final int go_testtouch=0x7f08000d;
         public static final int go_trackpad=0x7f080001;
         public static final int handshake_first=0x7f080008;
         public static final int hostname=0x7f080009;
@@ -147,7 +148,7 @@ containing a value of this type.
         public static final int setup=0x7f030001;
     }
     public static final class string {
-        public static final int app_name=0x7f050000;
+        public static final int app_name=0x7f050001;
         public static final int connection_settings=0x7f05000a;
         public static final int double_tap_and_drag=0x7f050005;
         public static final int enable_wifi=0x7f050011;
@@ -156,9 +157,10 @@ containing a value of this type.
         public static final int find_server=0x7f05000e;
         public static final int found_server=0x7f05000f;
         public static final int gamepad=0x7f050014;
+        public static final int go_pro=0x7f050017;
         public static final int handshake_failed=0x7f05000c;
         public static final int handshake_first=0x7f05000b;
-        public static final int hello=0x7f050001;
+        public static final int hello=0x7f050000;
         public static final int landscape=0x7f050009;
         public static final int send_msg_io_exception=0x7f050015;
         public static final int server_hostname=0x7f05000d;

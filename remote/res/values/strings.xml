@@ -22,4 +22,5 @@
     <string name="gamepad">Gamepad</string>
     <string name="send_msg_io_exception">Error sending message to server. Is Wifi connected?</string>
     <string name="failed_to_discover_server">Failed to discover server</string>
+    <string name="go_pro">Upgrade to pro version!</string>
 </resources>

@@ -5,7 +5,7 @@
  * should not be modified by hand.
  */
 
-package com.djpsoft.remote;
+package net.robotmedia.billing;
 
 public final class R {
     public static final class attr {

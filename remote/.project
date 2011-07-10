@@ -33,6 +33,11 @@
 	</natures>
 	<linkedResources>
 		<link>
+			<name>AndroidBillingLibrary_src</name>
+			<type>2</type>
+			<locationURI>_android_AndroidBillingLibrary_70afcdef/src</locationURI>
+		</link>
+		<link>
 			<name>moreDroid_src</name>
 			<type>2</type>
 			<locationURI>_android_moreDroid_6a995027/src</locationURI>
