@@ -294,10 +294,20 @@ public class RemoteSetup extends AbstractBillingActivity {
 
     @Override
     public void onPurchaseCancelled(String itemId) {
+        // TODO: remove after debug
+        Toast toast = new Toast(this);
+        toast.setText("onPurchaseCancelled " + itemId);
+        toast.setDuration(Toast.LENGTH_LONG);
+        toast.show();
     }
 
     @Override
     public void onPurchaseExecuted(String itemId) {
+        // TODO: remove after debug
+        Toast toast = new Toast(this);
+        toast.setText("onPurchaseExecuted " + itemId);
+        toast.setDuration(Toast.LENGTH_LONG);
+        toast.show();
         if (itemId == PRO_FUNCTIONS) {
             // Show pro functions
             Button btn = (Button) findViewById(R.id.send_ping);
@@ -310,6 +320,11 @@ public class RemoteSetup extends AbstractBillingActivity {
 
     @Override
     public void onPurchaseRefunded(String itemId) {
+        // TODO: remove after debug
+        Toast toast = new Toast(this);
+        toast.setText("onPurchaseRefunded " + itemId);
+        toast.setDuration(Toast.LENGTH_LONG);
+        toast.show();
         if (itemId == PRO_FUNCTIONS) {
             // Hide pro functions
             Button btn = (Button) findViewById(R.id.send_ping);
@@ -322,8 +337,10 @@ public class RemoteSetup extends AbstractBillingActivity {
 
     @Override
     public byte[] getObfuscationSalt() {
-        // TODO Auto-generated method stub
-        return null;
+        return new byte[] {22, 68, -98, 92, 83,
+                            86, -54, -20, -31, -31,
+                            9 , -55, -99, 108, -118,
+                            44, 127, -17, -125, -120};
     }
 
     @Override
