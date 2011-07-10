@@ -1,0 +1,10 @@
+remote/bin
+csserver/csserver.suo
+csserver/InputServer/bin
+csserver/InputServer/obj
+csserver/RemoteTrackpadServer/bin
+csserver/RemoteTrackpadServer/obj
+csserver/RemoteTrackpadServerInstaller/bin
+csserver/RemoteTrackpadServerInstaller/obj
+csserver/csserver/bin
+csserver/csserver/obj
