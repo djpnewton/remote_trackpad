@@ -27,6 +27,7 @@ public class RemoteSetup extends Activity {
     public static final String PREFS_NAME = "VIRTUAL_INPUT_PREFS";
     public static final String HANDSHAKE_FIRST = "HANDSHAKE_FIRST";
     public static final String HOSTNAME = "HOSTNAME";
+    public static final String MAC_ADDR = "MAC_ADDR";
 
     public static OSCClient oscClient = null;
 
@@ -38,6 +39,7 @@ public class RemoteSetup extends Activity {
     private CheckBox cbLandscape;
     private CheckBox cbHandshakeFirst;
     private EditText edHostname;
+    private EditText edMacaddress;
 
     /** Called when the activity is first created. */
     @Override
@@ -53,6 +55,7 @@ public class RemoteSetup extends Activity {
         cbLandscape = (CheckBox) findViewById(R.id.landscape);
         cbHandshakeFirst = (CheckBox) findViewById(R.id.handshake_first);
         edHostname = (EditText) findViewById(R.id.hostname);
+        edMacaddress = (EditText) findViewById(R.id.macaddress);
 
         loadPrefs();
 
@@ -177,6 +180,7 @@ public class RemoteSetup extends Activity {
                         Toast toast = Toast.makeText(con, R.string.found_server, Toast.LENGTH_SHORT);
                         toast.show();
                         edHostname.setText(host);
+                        edMacaddress.setText(Wol.getMacFromArpCache(host));
                     }
                     else {
                         Log.w(TAG, "discover.multicastPing() failed");
@@ -185,6 +189,7 @@ public class RemoteSetup extends Activity {
                             Toast toast = Toast.makeText(con, R.string.found_server, Toast.LENGTH_SHORT);
                             toast.show();
                             edHostname.setText(host);
+                            edMacaddress.setText(Wol.getMacFromArpCache(host));
                         }
                         else {
                             Log.w(TAG, "bruteforcePing() failed");
@@ -212,6 +217,13 @@ public class RemoteSetup extends Activity {
                 }
             }
         });
+        btn = (Button) findViewById(R.id.send_wol);
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Wol.wakeUp(edMacaddress.getText().toString());
+            }
+        });
     }
 
     private void loadPrefs() {
@@ -224,6 +236,7 @@ public class RemoteSetup extends Activity {
        cbLandscape.setChecked(settings.getBoolean(TrackpadActivity.LANDSCAPE, true));
        cbHandshakeFirst.setChecked(settings.getBoolean(HANDSHAKE_FIRST, true));
        edHostname.setText(settings.getString(HOSTNAME, ""));
+       edMacaddress.setText(settings.getString(MAC_ADDR, ""));
     }
 
     private void savePrefs() {
@@ -237,6 +250,7 @@ public class RemoteSetup extends Activity {
         editor.putBoolean(TrackpadActivity.LANDSCAPE, cbLandscape.isChecked());
         editor.putBoolean(HANDSHAKE_FIRST, cbHandshakeFirst.isChecked());
         editor.putString(HOSTNAME, edHostname.getText().toString());
+        editor.putString(MAC_ADDR, edMacaddress.getText().toString());
         editor.commit();
     }
 

@@ -81,11 +81,25 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/hostname"
                     android:text="192.168.1.6"/>
+                <TextView
+                    android:text="@string/server_macaddress"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"/>
+                <EditText
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/macaddress"
+                    android:text=""/>
                 <Button
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/find_server"
                     android:id="@+id/send_ping"/>
+                <Button
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/send_wol"
+                    android:id="@+id/send_wol"/>
                 <Button
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"

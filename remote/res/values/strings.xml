@@ -12,8 +12,10 @@
     <string name="connection_settings">Connection Settings</string>
     <string name="handshake_first">Confirm handshake with server before starting trackpad</string>
     <string name="handshake_failed">Server handshake failed</string>
-    <string name="server_hostname">Server Hostname</string>
+    <string name="server_hostname">Server Hostname:</string>
+    <string name="server_macaddress">Server Mac Address:</string>
     <string name="find_server">Find server</string>
+    <string name="send_wol">Send Wake-On-Lan packet to Mac Address</string>
     <string name="found_server">Found server</string>
     <string name="wifi_not_enabled">Wifi not enabled</string>
     <string name="enable_wifi">Enable Wifi</string>
