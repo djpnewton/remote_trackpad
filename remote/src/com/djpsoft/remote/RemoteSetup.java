@@ -345,7 +345,7 @@ public class RemoteSetup extends AbstractBillingActivity {
 
     @Override
     public String getPublicKey() {
-        // TODO Auto-generated method stub
-        return null;
+        // from https://market.android.com/publish/editProfile
+        return "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAhJtG9OJWqvO7UDCn1+uBb4Dg1JkbU4HzowIUEogvoQgqqhyFyXNPN4HeBHWRcszicXHqdsgzKCVmGYfH2Ys5qW6JhYzT6uJtmo+DkvkfR6XPhh1TlShSR6MVS6OY4oHSKr6ymYGrqnrkk8IsqOLQlFWKsy5Efh8vxfmPbKwWj8PRveAJGdE7XMOXNwXJ5JswgL6HGhqB9KE8s+vSNTD+685hKYqBAEUB3StCmaQekSM4Z/fM/l9CJEeRx2odomg0Zo7lbtSd6ozrTI1voxoUFjWKYU98A27pvfPnqypa1ovKSP1vJ+q7h7DGz+AQshshtN3mqNJSbt2kWpgojURO3QIDAQAB";
     }
 }
