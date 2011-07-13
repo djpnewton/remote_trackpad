@@ -36,7 +36,7 @@ using System;
 using System.Runtime.InteropServices;
 using System.IO;
 
-namespace InputServer
+namespace InputController
 {
     public class EndpointVolume
     {

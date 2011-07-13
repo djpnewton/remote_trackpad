@@ -3,34 +3,12 @@ using System.Collections.Generic;
 using System.Text;
 using System.Net;
 using Bespoke.Common.Osc;
-using WindowsInput;
+using InputController;
 
 namespace InputServer
 {
     public class InputServer : IDisposable
     {
-        public enum JoypadButton
-        {
-            DPAD_LEFT,
-            DPAD_TOP,
-            DPAD_RIGHT,
-            DPAD_BOTTOM,
-            BUTTON_START,
-            BUTTON_SELECT,
-            BUTTON_A,
-            BUTTON_B,
-        }
-
-        public enum Keyboard
-        {
-            KEYCODE_SHIFT = -1,
-            KEYCODE_MODE_CHANGE = -2,
-            KEYCODE_CANCEL = -3,
-            KEYCODE_DONE = -4,
-            KEYCODE_DELETE = -5,
-            KEYCODE_ALT = -6
-        }
-
         public const int DEFAULT_VIP_PORT = 12321;
 
         public const String JOYPAD_BUTTON_EVENT = "/joypad_button_event";
@@ -39,10 +17,9 @@ namespace InputServer
         public const String KEYBOARD_EVENT = "/keyboard_event";
         public const String VOLUME_EVENT = "/volume_event";
 
-        int lastButtonState = 0;
-
         ILog log;
         OscServer server;
+        IInputController inputController;
 
         public bool UseVolumeMacros { get; set; }
 
@@ -61,6 +38,7 @@ namespace InputServer
             server.RegisterMethod(VOLUME_EVENT);
             server.MessageReceived += new OscMessageReceivedHandler(server_MessageReceived);
             server.Start();
+            inputController = new WinInputController();
             log.Log(LogLevel.Info, "Starting Input Server");
         }
 
@@ -85,39 +63,7 @@ namespace InputServer
                 JoypadButton btn = (JoypadButton)reverseEndianizeOscInt(e.Message.Data[0]);
                 bool depressed = reverseEndianizeOscInt(e.Message.Data[1]) != 0;
                 log.Log(LogLevel.Info, string.Format("    {0} - {1}", btn, depressed));
-
-                VirtualKeyCode code = VirtualKeyCode.VK_A;
-                switch (btn)
-                {
-                    case JoypadButton.DPAD_LEFT:
-                        code = VirtualKeyCode.LEFT;
-                        break;
-                    case JoypadButton.DPAD_TOP:
-                        code = VirtualKeyCode.UP;
-                        break;
-                    case JoypadButton.DPAD_RIGHT:
-                        code = VirtualKeyCode.RIGHT;
-                        break;
-                    case JoypadButton.DPAD_BOTTOM:
-                        code = VirtualKeyCode.DOWN;
-                        break;
-                    case JoypadButton.BUTTON_START:
-                        code = VirtualKeyCode.RETURN;
-                        break;
-                    case JoypadButton.BUTTON_SELECT:
-                        code = VirtualKeyCode.SPACE;
-                        break;
-                    case JoypadButton.BUTTON_A:
-                        code = VirtualKeyCode.VK_Z;
-                        break;
-                    case JoypadButton.BUTTON_B:
-                        code = VirtualKeyCode.VK_X;
-                        break;
-                }
-                if (depressed)
-                    InputSimulator.SimulateKeyDown(code);
-                else
-                    InputSimulator.SimulateKeyUp(code);
+                inputController.JoypadEvent(btn, depressed);                
             }
             else if (e.Message.Address == MOUSE_EVENT)
             {
@@ -125,49 +71,21 @@ namespace InputServer
                 int dx = reverseEndianizeOscInt(e.Message.Data[1]);
                 int dy = reverseEndianizeOscInt(e.Message.Data[2]);
                 log.Log(LogLevel.Info, string.Format("    btn: {0}, dx: {1}, dy: {2}", btn, dx, dy));
-                uint mouseEventFlags = (uint)MouseEvent.MouseEventFlags.MOVE;
-                if (lastButtonState != 1 && btn == 1)
-                    mouseEventFlags |= (uint)MouseEvent.MouseEventFlags.LEFTDOWN;
-                if (lastButtonState == 1 && btn != 1)
-                    mouseEventFlags |= (uint)MouseEvent.MouseEventFlags.LEFTUP;
-                if (lastButtonState != 2 && btn == 2)
-                    mouseEventFlags |= (uint)MouseEvent.MouseEventFlags.RIGHTDOWN;
-                if (lastButtonState == 2 && btn != 2)
-                    mouseEventFlags |= (uint)MouseEvent.MouseEventFlags.RIGHTUP;
-                MouseEvent.mouse_event(mouseEventFlags, (uint)dx, (uint)dy, 0, UIntPtr.Zero);
-                lastButtonState = btn;
+                inputController.MouseEvent(btn, dx, dy);
             }
             else if (e.Message.Address == SCROLL_EVENT)
             {
                 int dx = reverseEndianizeOscInt(e.Message.Data[0]);
                 int dy = reverseEndianizeOscInt(e.Message.Data[1]);
                 log.Log(LogLevel.Info, string.Format("    dx: {0}, dy: {1}", dx, dy));
-                MouseEvent.mouse_event((uint)MouseEvent.MouseEventFlags.WHEEL, 0, 0, (uint)(-dy * 20), UIntPtr.Zero);
-                MouseEvent.mouse_event((uint)MouseEvent.MouseEventFlags.HWHEEL, 0, 0, (uint)(dx * 20), UIntPtr.Zero);
+                inputController.ScrollEvent(dx, dy);
             }
             else if (e.Message.Address == KEYBOARD_EVENT)
             {
                 int code = reverseEndianizeOscInt(e.Message.Data[0]);
                 bool shift = reverseEndianizeOscInt(e.Message.Data[1]) != 0;
                 log.Log(LogLevel.Info, string.Format("    code: {0,2:X}, '{1}', shift: {2}", code, (char)code, shift));
-                switch ((Keyboard)code)
-                {
-                    case Keyboard.KEYCODE_DELETE:
-                        InputSimulator.SimulateKeyPress(VirtualKeyCode.BACK);
-                        break;
-                    case Keyboard.KEYCODE_ALT:
-                    case Keyboard.KEYCODE_CANCEL:
-                    case Keyboard.KEYCODE_DONE:
-                    case Keyboard.KEYCODE_MODE_CHANGE:
-                    case Keyboard.KEYCODE_SHIFT:
-                        break;
-                    default:
-                        string s = ((char)code).ToString();
-                        if (shift)
-                            s = s.ToUpper();
-                        InputSimulator.SimulateTextEntry(s);
-                        break;
-                }
+                inputController.KeyboardEvent(code, shift);
             }
             else if (e.Message.Address == VOLUME_EVENT)
             {
@@ -183,17 +101,17 @@ namespace InputServer
                     foreach (KeyHelper.KeyState ks in keys)
                     {
                         if (ks.KeyDown)
-                            InputSimulator.SimulateKeyDown((VirtualKeyCode)ks.Key);
+                            inputController.SysKeyDown((int)ks.Key);
                         else
-                            InputSimulator.SimulateKeyUp((VirtualKeyCode)ks.Key);
+                            inputController.SysKeyUp((int)ks.Key);
                     }
                 }
                 else
                 {
                     if (d == 1)
-                        SoundVolume.VolumeUp();
+                        inputController.VolumeUp();
                     else
-                        SoundVolume.VolumeDown();
+                        inputController.VolumeDown();
                 }
             }
         }

@@ -8,3 +8,7 @@ csserver/RemoteTrackpadServerInstaller/bin
 csserver/RemoteTrackpadServerInstaller/obj
 csserver/csserver/bin
 csserver/csserver/obj
+csserver/InputController/bin
+csserver/InputController/obj
+csserver/WinInputController/bin
+csserver/WinInputController/obj
