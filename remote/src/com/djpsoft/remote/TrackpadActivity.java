@@ -2,15 +2,22 @@ package com.djpsoft.remote;
 
 import java.io.IOException;
 
-import com.djpsoft.remote.R;
-
 import android.app.Activity;
+import android.content.Context;
 import android.content.pm.ActivityInfo;
 import android.inputmethodservice.KeyboardView;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.LinearLayout.LayoutParams;
 import android.widget.Toast;
+
+import com.google.ads.AdRequest;
+import com.google.ads.AdSize;
+import com.google.ads.AdView;
 
 public class TrackpadActivity extends Activity {
 
@@ -134,19 +141,34 @@ public class TrackpadActivity extends Activity {
             setupMouseView();
     }
 
+    private View createViewContainer(View mainView) {
+        LinearLayout ll = new LinearLayout(this);
+        AdView adView = new AdView(this, AdSize.BANNER, getString(R.string.ad_id));
+        adView.setLayoutParams(new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
+        ll.addView(adView);
+        ll.setOrientation(LinearLayout.VERTICAL);
+        mainView.setLayoutParams(new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT, 1));
+        ll.addView(mainView);
+        setContentView(ll);
+        adView.loadAd(new AdRequest());
+        return ll;
+    }
+
     private void setupMouseView() {
         TrackpadView view = new TrackpadView(this, tapToClick, doubleTapAndDrag, twoFingerTapRightClick, twoFingerDragScroll, showButtons);
-        setContentView(view);
+        createViewContainer(view);
     }
 
     private void setupKeyboardView() {
-        setContentView(R.layout.kbd);
-        KeyboardView kbdView = (KeyboardView) findViewById(R.id.kbd);
+        LayoutInflater inflater = (LayoutInflater)this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View view = inflater.inflate(R.layout.kbd, null);
+        KeyboardView kbdView = (KeyboardView) view.findViewById(R.id.kbd);
         kbd = new SoftKeyboard(this, kbdView, new SoftKeyboard.CloseKeyboardListener() {
             @Override
             public void function() {
                 toggleView();
             }
         });
+        createViewContainer(view);
     }
 }
