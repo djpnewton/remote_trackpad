@@ -5,6 +5,7 @@ using System.Text;
 using System.Runtime.InteropServices;
 using InputController;
 using WindowsInput;
+using System.Windows.Forms;
 
 namespace InputController
 {
@@ -123,6 +124,24 @@ namespace InputController
         public void SysKeyUp(int code)
         {
             InputSimulator.SimulateKeyUp((VirtualKeyCode)code);
+        }
+
+        public void PlayKeyMacro(string keyMacro)
+        {
+            List<KeyHelper.KeyState> keys;
+            keys = KeyHelper.StringToKeyStates(keyMacro);
+            foreach (KeyHelper.KeyState ks in keys)
+            {
+                if (ks.KeyDown)
+                    InputSimulator.SimulateKeyDown((VirtualKeyCode)ks.Key);
+                else
+                    InputSimulator.SimulateKeyUp((VirtualKeyCode)ks.Key);
+            }
+        }
+
+        public string KeyCodeToMacro(int code, bool keyDown)
+        {
+            return KeyHelper.KeyCodeToString((Keys)code, keyDown);
         }
 
         public void VolumeUp()

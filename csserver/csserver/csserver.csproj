@@ -71,9 +71,17 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\InputController\InputController.csproj">
+      <Project>{C0483EB9-EB86-4A66-A29F-367E0FC47225}</Project>
+      <Name>InputController</Name>
+    </ProjectReference>
     <ProjectReference Include="..\InputServer\InputServer.csproj">
       <Project>{C9D377ED-948C-436B-B355-4FD4D3421C0E}</Project>
       <Name>InputServer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WinInputController\WinInputController.csproj">
+      <Project>{84F3757C-4EDB-4511-9ACC-1695A28D87BC}</Project>
+      <Name>WinInputController</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

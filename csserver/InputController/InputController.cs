@@ -67,16 +67,19 @@ namespace InputController
         void KeyboardEvent(int code, bool shift);
 
         /**
-         * Perform a system key down event
-         * @param code The key code
+         * Play back a keyboard macro
+         * @param keyMacro The string of encoded key codes
          */
-        void SysKeyDown(int code);
+        void PlayKeyMacro(string keyMacro);
 
         /**
-         * Perform a system key down event
+         * Convert a system key code to a encoded keyboard
+         * macro string
          * @param code The key code
+         * @param keyDown True if this is a key down event
+         * (false if it is a key up event)
          */
-        void SysKeyUp(int code);
+        string KeyCodeToMacro(int code, bool keyDown);
 
         /**
          * Turn up the system volume

@@ -57,6 +57,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Data" />
@@ -64,6 +65,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EndpointVolume.cs" />
+    <Compile Include="KeyHelper.cs" />
     <Compile Include="SoundVolume.cs" />
     <Compile Include="WinInputController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

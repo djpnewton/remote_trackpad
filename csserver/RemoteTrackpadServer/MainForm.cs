@@ -8,6 +8,7 @@ using System.Net;
 using System.Windows.Forms;
 using InputServer;
 using System.Runtime.InteropServices;
+using InputController;
 
 namespace RemoteTrackpadServer
 {
@@ -19,6 +20,7 @@ namespace RemoteTrackpadServer
         bool useLog = false;
 #endif
 
+        WinInputController inputController;
         DiscoveryServer dserver;
         InputServer.InputServer iserver;
         LogForm logForm;
@@ -43,9 +45,12 @@ namespace RemoteTrackpadServer
             else
                 log = new NullLog();
 
+            // input controller
+            inputController = new WinInputController();
+
             // services
             dserver = new DiscoveryServer(log);
-            iserver = new InputServer.InputServer(log);
+            iserver = new InputServer.InputServer(log, inputController);
 
             // hide window
             WindowState = FormWindowState.Minimized;
@@ -173,22 +178,22 @@ namespace RemoteTrackpadServer
 
         void tbVolumeUpMacro_KeyDown(object sender, KeyEventArgs e)
         {
-            tbVolumeUpMacro.Text += KeyHelper.KeyCodeToString(e.KeyCode, true);
+            tbVolumeUpMacro.Text += inputController.KeyCodeToMacro((int)e.KeyCode, true);
         }
 
         void tbVolumeUpMacro_KeyUp(object sender, KeyEventArgs e)
         {
-            tbVolumeUpMacro.Text += KeyHelper.KeyCodeToString(e.KeyCode, false);
+            tbVolumeUpMacro.Text += inputController.KeyCodeToMacro((int)e.KeyCode, false);
         }
 
         void tbVolumeDownMacro_KeyDown(object sender, KeyEventArgs e)
         {
-            tbVolumeDownMacro.Text += KeyHelper.KeyCodeToString(e.KeyCode, true);
+            tbVolumeDownMacro.Text += inputController.KeyCodeToMacro((int)e.KeyCode, true);
         }
 
         void tbVolumeDownMacro_KeyUp(object sender, KeyEventArgs e)
         {
-            tbVolumeDownMacro.Text += KeyHelper.KeyCodeToString(e.KeyCode, false);
+            tbVolumeDownMacro.Text += inputController.KeyCodeToMacro((int)e.KeyCode, false);
         }
 
         private void btnClearVolUp_Click(object sender, EventArgs e)

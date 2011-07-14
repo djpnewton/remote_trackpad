@@ -56,13 +56,11 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="InputServer.cs" />
     <Compile Include="DiscoveryServer.cs" />
-    <Compile Include="KeyHelper.cs" />
     <Compile Include="Log.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -70,10 +68,6 @@
     <ProjectReference Include="..\InputController\InputController.csproj">
       <Project>{C0483EB9-EB86-4A66-A29F-367E0FC47225}</Project>
       <Name>InputController</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\WinInputController\WinInputController.csproj">
-      <Project>{84F3757C-4EDB-4511-9ACC-1695A28D87BC}</Project>
-      <Name>WinInputController</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

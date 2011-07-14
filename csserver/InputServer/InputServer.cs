@@ -27,9 +27,10 @@ namespace InputServer
 
         public string VolumeDownMacro { get; set; }
 
-        public InputServer(ILog log)
+        public InputServer(ILog log, IInputController inputController)
         {
             this.log = log;
+            this.inputController = inputController;
             server = new OscServer(TransportType.Udp, IPAddress.Any, DEFAULT_VIP_PORT);
             server.RegisterMethod(JOYPAD_BUTTON_EVENT);
             server.RegisterMethod(MOUSE_EVENT);
@@ -38,7 +39,6 @@ namespace InputServer
             server.RegisterMethod(VOLUME_EVENT);
             server.MessageReceived += new OscMessageReceivedHandler(server_MessageReceived);
             server.Start();
-            inputController = new WinInputController();
             log.Log(LogLevel.Info, "Starting Input Server");
         }
 
@@ -93,18 +93,10 @@ namespace InputServer
                 log.Log(LogLevel.Info, string.Format("    d: {0}", d));
                 if (UseVolumeMacros)
                 {
-                    List<KeyHelper.KeyState> keys;
                     if (d == 1)
-                        keys = KeyHelper.StringToKeyStates(VolumeUpMacro);
+                        inputController.PlayKeyMacro(VolumeUpMacro);
                     else
-                        keys = KeyHelper.StringToKeyStates(VolumeDownMacro);
-                    foreach (KeyHelper.KeyState ks in keys)
-                    {
-                        if (ks.KeyDown)
-                            inputController.SysKeyDown((int)ks.Key);
-                        else
-                            inputController.SysKeyUp((int)ks.Key);
-                    }
+                        inputController.PlayKeyMacro(VolumeDownMacro);
                 }
                 else
                 {
