@@ -3,7 +3,7 @@ import re
 
 # raw version numbers
 version_major    = 1
-version_minor    = 0
+version_minor    = 1
 version_build    = 0
 version_revision = 0
 
@@ -11,7 +11,7 @@ version_revision = 0
 version_name = "%d.%d.%d.%d" % (version_major, version_minor, version_build, version_revision)
 
 # android version code
-app_version_code = 1
+app_version_code = 2
 
 def exit(code, msg):
     print msg
