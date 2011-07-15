@@ -18,6 +18,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WinInputController", "WinIn
 EndProject
 Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "UpdateProjectVersions", "..\UpdateProjectVersions\UpdateProjectVersions.pyproj", "{D49C7CB2-4445-40B5-BC79-D3EA83354680}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LinInputController", "LinInputController\LinInputController.csproj", "{A733F9C4-6109-43E1-991F-BBE6E3AF3305}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -104,6 +106,16 @@ Global
 		{D49C7CB2-4445-40B5-BC79-D3EA83354680}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D49C7CB2-4445-40B5-BC79-D3EA83354680}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{D49C7CB2-4445-40B5-BC79-D3EA83354680}.Release|x86.ActiveCfg = Release|Any CPU
+		{A733F9C4-6109-43E1-991F-BBE6E3AF3305}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A733F9C4-6109-43E1-991F-BBE6E3AF3305}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A733F9C4-6109-43E1-991F-BBE6E3AF3305}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{A733F9C4-6109-43E1-991F-BBE6E3AF3305}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{A733F9C4-6109-43E1-991F-BBE6E3AF3305}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{A733F9C4-6109-43E1-991F-BBE6E3AF3305}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A733F9C4-6109-43E1-991F-BBE6E3AF3305}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A733F9C4-6109-43E1-991F-BBE6E3AF3305}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{A733F9C4-6109-43E1-991F-BBE6E3AF3305}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{A733F9C4-6109-43E1-991F-BBE6E3AF3305}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
