@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using InputServer;
 
-namespace RemoteTrackpadServer
+namespace InputServer
 {
     public class NullLog : ILog
     {

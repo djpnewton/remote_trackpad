@@ -13,6 +13,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WinInputController", "WinIn
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LinInputController", "LinInputController\LinInputController.csproj", "{A733F9C4-6109-43E1-991F-BBE6E3AF3305}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RemoteTrackpadServerGtk", "RemoteTrackpadServerGtk\RemoteTrackpadServerGtk.csproj", "{D5FBC565-C037-40A8-B94D-183A1E6EA5F9}"
+EndProject
+Project("{9344bdbb-3e7f-41fc-a0dd-8665d75ee146}") = "Packages", "Packages.mdproj", "{4E74CA37-24FC-4518-B8A9-7C18454771E6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -35,6 +39,12 @@ Global
 		{076B79C1-404B-4CA7-A41C-CDF5857895EC}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{076B79C1-404B-4CA7-A41C-CDF5857895EC}.Release|x86.ActiveCfg = Release|x86
 		{076B79C1-404B-4CA7-A41C-CDF5857895EC}.Release|x86.Build.0 = Release|x86
+		{4E74CA37-24FC-4518-B8A9-7C18454771E6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4E74CA37-24FC-4518-B8A9-7C18454771E6}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{4E74CA37-24FC-4518-B8A9-7C18454771E6}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{4E74CA37-24FC-4518-B8A9-7C18454771E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4E74CA37-24FC-4518-B8A9-7C18454771E6}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{4E74CA37-24FC-4518-B8A9-7C18454771E6}.Release|x86.ActiveCfg = Release|Any CPU
 		{84F3757C-4EDB-4511-9ACC-1695A28D87BC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{84F3757C-4EDB-4511-9ACC-1695A28D87BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{84F3757C-4EDB-4511-9ACC-1695A28D87BC}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
@@ -83,6 +93,18 @@ Global
 		{C9D377ED-948C-436B-B355-4FD4D3421C0E}.Release|Mixed Platforms.Build.0 = Release|x86
 		{C9D377ED-948C-436B-B355-4FD4D3421C0E}.Release|x86.ActiveCfg = Release|x86
 		{C9D377ED-948C-436B-B355-4FD4D3421C0E}.Release|x86.Build.0 = Release|x86
+		{D5FBC565-C037-40A8-B94D-183A1E6EA5F9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D5FBC565-C037-40A8-B94D-183A1E6EA5F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D5FBC565-C037-40A8-B94D-183A1E6EA5F9}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{D5FBC565-C037-40A8-B94D-183A1E6EA5F9}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{D5FBC565-C037-40A8-B94D-183A1E6EA5F9}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{D5FBC565-C037-40A8-B94D-183A1E6EA5F9}.Debug|x86.Build.0 = Debug|Any CPU
+		{D5FBC565-C037-40A8-B94D-183A1E6EA5F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D5FBC565-C037-40A8-B94D-183A1E6EA5F9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D5FBC565-C037-40A8-B94D-183A1E6EA5F9}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{D5FBC565-C037-40A8-B94D-183A1E6EA5F9}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{D5FBC565-C037-40A8-B94D-183A1E6EA5F9}.Release|x86.ActiveCfg = Release|Any CPU
+		{D5FBC565-C037-40A8-B94D-183A1E6EA5F9}.Release|x86.Build.0 = Release|Any CPU
 		{FF8E4B5C-BBF1-4218-A69E-C5A2A417B24B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{FF8E4B5C-BBF1-4218-A69E-C5A2A417B24B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FF8E4B5C-BBF1-4218-A69E-C5A2A417B24B}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
@@ -113,7 +135,7 @@ Global
 		{D49C7CB2-4445-40B5-BC79-D3EA83354680}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
-		StartupItem = csserver\csserver.csproj
+		StartupItem = RemoteTrackpadServerGtk\RemoteTrackpadServerGtk.csproj
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

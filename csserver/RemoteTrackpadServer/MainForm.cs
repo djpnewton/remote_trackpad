@@ -7,7 +7,6 @@ using System.Text;
 using System.Net;
 using System.Windows.Forms;
 using InputServer;
-using System.Runtime.InteropServices;
 using InputController;
 
 namespace RemoteTrackpadServer

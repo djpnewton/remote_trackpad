@@ -6,6 +6,8 @@ csserver/RemoteTrackpadServer/bin
 csserver/RemoteTrackpadServer/obj
 csserver/RemoteTrackpadServerInstaller/bin
 csserver/RemoteTrackpadServerInstaller/obj
+csserver/RemoteTrackpadServerGtk/bin
+csserver/RemoteTrackpadServerGtk/obj
 csserver/csserver/bin
 csserver/csserver/obj
 csserver/InputController/bin
