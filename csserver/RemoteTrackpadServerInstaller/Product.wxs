@@ -38,6 +38,8 @@
         <File Source='$(var.SolutionDir)\$(var.COMPRESSED_NAME)\$(var.OutDir)\Bespoke.Common.dll' />
         <File Source='$(var.SolutionDir)\$(var.COMPRESSED_NAME)\$(var.OutDir)\Bespoke.Common.Osc.dll' />
         <File Source='$(var.SolutionDir)\$(var.COMPRESSED_NAME)\$(var.OutDir)\InputSimulator.dll' />
+        <File Source='$(var.SolutionDir)\$(var.COMPRESSED_NAME)\$(var.OutDir)\InputController.dll' />
+        <File Source='$(var.SolutionDir)\$(var.COMPRESSED_NAME)\$(var.OutDir)\WinInputController.dll' />
       </Component>
     </DirectoryRef>
 
@@ -80,6 +82,9 @@
           Control="Finish"
           Event="DoAction"
           Value="LaunchApplication">WIXUI_EXITDIALOGOPTIONALCHECKBOX = 1 and NOT Installed</Publish>
+      <!-- skip licence dialog -->
+      <Publish Dialog="WelcomeDlg" Control="Next" Event="NewDialog" Value="CustomizeDlg" Order="99">1</Publish>
+      <Publish Dialog="CustomizeDlg" Control="Back" Event="NewDialog" Value="WelcomeDlg" Order="99">1</Publish>
     </UI>
     <Property Id="WIXUI_EXITDIALOGOPTIONALTEXT" Value="Remember to allow $(var.NAME) through the firewall!" />
     <Property Id="WIXUI_EXITDIALOGOPTIONALCHECKBOXTEXT" Value="Launch $(var.NAME)" />
