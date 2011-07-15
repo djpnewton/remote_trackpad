@@ -13,7 +13,21 @@ namespace csserver
         {
             ConsoleLog log = new ConsoleLog();
             DiscoveryServer dserver = new DiscoveryServer(log);
-            InputServer.InputServer iserver = new InputServer.InputServer(log, new WinInputController());
+            IInputController inputController;
+            switch (System.Environment.OSVersion.Platform)
+            {
+                case PlatformID.Win32NT:
+                    inputController = new WinInputController();
+                    break;
+                case PlatformID.Unix:
+                    inputController = new LinInputController();
+                    break;
+                default:
+                    Console.WriteLine("Environment not supported");
+                    return;
+            }
+
+            InputServer.InputServer iserver = new InputServer.InputServer(log, inputController);
 
             Console.WriteLine("Press any key to exit.");
             Console.ReadKey();

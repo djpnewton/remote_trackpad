@@ -12,3 +12,9 @@ csserver/InputController/bin
 csserver/InputController/obj
 csserver/WinInputController/bin
 csserver/WinInputController/obj
+csserver/LinInputController/bin
+csserver/LinInputController/obj
+
+*.pidb
+*.userprefs
+*.resources

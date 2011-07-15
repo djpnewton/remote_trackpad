@@ -116,16 +116,6 @@ namespace InputController
             }
         }
 
-        public void SysKeyDown(int code)
-        {
-            InputSimulator.SimulateKeyDown((VirtualKeyCode)code);
-        }
-
-        public void SysKeyUp(int code)
-        {
-            InputSimulator.SimulateKeyUp((VirtualKeyCode)code);
-        }
-
         public void PlayKeyMacro(string keyMacro)
         {
             List<KeyHelper.KeyState> keys;
