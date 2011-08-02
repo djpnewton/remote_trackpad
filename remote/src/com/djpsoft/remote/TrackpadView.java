@@ -393,23 +393,28 @@ public class TrackpadView extends TouchView {
         // draw trackpad text
         p.setColor(0xAAAAAAAA);
         p.setTypeface(Typeface.DEFAULT_BOLD);
-        drawText(canvas, p, "Trackpad", trackPad);
+        RectF textBounds = drawText(canvas, p, "Trackpad", trackPad);
+        textBounds.offset(0, textBounds.height() + 10);
+        p.setColor(0x88888888);
+        textBounds = drawText(canvas, p, "(press 'Menu' button", textBounds);
+        textBounds.offset(0, textBounds.height() + 5);
+        drawText(canvas, p, "to toggle keyboard)", textBounds);
         // draw button text
+        p.setColor(0xAAAAAAAA);
         if (showButtons) {
             drawText(canvas, p, "Left Button", buttonLeft);
             drawText(canvas, p, "Right Button", buttonRight);
         }
-
         // draw touch locations
         drawTouchPoints(canvas);
     }
 
-    private void drawText(Canvas canvas, Paint p, String text, RectF box) {
+    private RectF drawText(Canvas canvas, Paint p, String text, RectF box) {
         Rect bounds = new Rect();
         p.getTextBounds(text, 0, text.length(), bounds);
-        canvas.drawText(text,
-                box.left + box.width() / 2.0f - bounds.width() / 2.0f,
-                box.top + box.height() / 2.0f - bounds.height() / 2.0f,
-                p);
+        float x = box.left + box.width() / 2.0f - bounds.width() / 2.0f;
+        float y = box.top + box.height() / 2.0f - bounds.height() / 2.0f;
+        canvas.drawText(text, x, y, p);
+        return new RectF(x, y, x + bounds.width(), y + bounds.height());
     }
 }
