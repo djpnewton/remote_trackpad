@@ -6,6 +6,8 @@ using System.Drawing;
 using System.Text;
 using System.Net;
 using System.Windows.Forms;
+using System.Reflection;
+using System.Diagnostics;
 using InputServer;
 using InputController;
 
@@ -44,6 +46,19 @@ namespace RemoteTrackpadServer
             else
                 log = new NullLog();
 
+            // version string
+            lbVersion.Text = GetVersion();
+
+            // ip address
+            try
+            {
+                lbIpAddr.Text = GetIpAddress();
+            }
+            catch
+            {
+                lbIpAddr.Text = "Unknown";
+            }
+
             // input controller
             inputController = new WinInputController();
 
@@ -54,6 +69,13 @@ namespace RemoteTrackpadServer
             // hide window
             WindowState = FormWindowState.Minimized;
             ShowInTaskbar = false;
+        }
+
+        private string GetVersion()
+        {
+            Assembly assembly = Assembly.GetExecutingAssembly();
+            FileVersionInfo fvi = FileVersionInfo.GetVersionInfo(assembly.Location);
+            return fvi.ProductVersion;
         }
 
         private void UpdateInputServerConf()
@@ -134,16 +156,22 @@ namespace RemoteTrackpadServer
 
         private void contextMenuStrip1_Opening(object sender, CancelEventArgs e)
         {
+            miVersion.Text = "Server Version is " + GetVersion();
             try
             {
-                IPHostEntry IPHost = Dns.GetHostByName(Dns.GetHostName());
-                miLocalIp.Text = "My IP address is " + IPHost.AddressList[0].ToString();
+                miLocalIp.Text = "Server IP address is " + GetIpAddress();
                 miLocalIp.Visible = true;
             }
             catch
             {
                 miLocalIp.Visible = false;
             }
+        }
+
+        private string GetIpAddress()
+        {
+            IPHostEntry IPHost = Dns.GetHostByName(Dns.GetHostName());
+            return IPHost.AddressList[0].ToString();
         }
 
         private void rbChangePCVolume_CheckedChanged(object sender, EventArgs e)
