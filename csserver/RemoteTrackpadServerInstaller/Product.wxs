@@ -2,7 +2,7 @@
 <?define NAME="Remote Trackpad Server"?>
 <?define COMPRESSED_NAME="RemoteTrackpadServer"?>
 <?define EXE_NAME="RemoteTrackpadServer.exe"?>
-<?define VERSION="1.1.2.0"?>
+<?define VERSION="1.2.0.0"?>
 <?define MFG="DJP"?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi"
      xmlns:netfx="http://schemas.microsoft.com/wix/NetFxExtension">

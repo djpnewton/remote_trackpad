@@ -3,8 +3,8 @@ import re
 
 # raw version numbers
 version_major    = 1
-version_minor    = 1
-version_build    = 2
+version_minor    = 2
+version_build    = 0
 version_revision = 0
 
 # version name
