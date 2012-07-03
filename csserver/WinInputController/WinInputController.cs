@@ -101,6 +101,9 @@ namespace InputController
                 case Keyboard.KEYCODE_DELETE:
                     InputSimulator.SimulateKeyPress(VirtualKeyCode.BACK);
                    break;
+                case Keyboard.KEYCODE_ENTER:
+                   InputSimulator.SimulateKeyPress(VirtualKeyCode.RETURN);
+                   break;
                 case Keyboard.KEYCODE_ALT:
                 case Keyboard.KEYCODE_CANCEL:
                 case Keyboard.KEYCODE_DONE:

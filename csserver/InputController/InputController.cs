@@ -32,7 +32,8 @@ namespace InputController
         KEYCODE_CANCEL = -3,
         KEYCODE_DONE = -4,
         KEYCODE_DELETE = -5,
-        KEYCODE_ALT = -6
+        KEYCODE_ALT = -6,
+        KEYCODE_ENTER = -7
     }
 
     public interface IInputController

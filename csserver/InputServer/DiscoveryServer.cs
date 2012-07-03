@@ -11,7 +11,7 @@ namespace InputServer
         public const int DEFAULT_MULTICAST_PORT = 12421;
 
         public const String PING = "VIP_Ping";
-        public const String PONG = "VIP_Pong";
+        public const String PONG = "VIP_Pong_02";
 
         ILog log;
         UdpClient subscriber;

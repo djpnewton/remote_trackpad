@@ -4,6 +4,7 @@ import java.net.InetAddress;
 import java.net.SocketException;
 import java.net.UnknownHostException;
 
+import com.djpsoft.remote.OSCDiscover.HandshakeResult;
 import com.djpsoft.remote.R;
 
 import android.app.Activity;
@@ -236,16 +237,25 @@ public class RemoteSetup extends Activity {
         if (!cbHandshakeFirst.isChecked())
             return true;
         else
-            if (OSCDiscover.checkHandshake(edHostname.getText().toString(),
-                    OSCDiscover.DEFAULT_MULTICAST_PORT)) {
-                return true;
-            }
-            else {
+        {
+            HandshakeResult result = OSCDiscover.checkHandshake(edHostname.getText().toString(),
+                    OSCDiscover.DEFAULT_MULTICAST_PORT);
+            if (result == HandshakeResult.NO_PONG) {
                 Toast toast = Toast.makeText(this, R.string.handshake_failed, Toast.LENGTH_SHORT);
                 toast.show();
                 Log.e(TAG, "checkHandshake failed");
                 return false;
             }
+            else if (result == HandshakeResult.OLD_VERSION)
+            {
+                Toast toast = Toast.makeText(this, R.string.handshake_oldversion, Toast.LENGTH_SHORT);
+                toast.show();
+                Log.e(TAG, "checkHandshake failed");
+                return false;
+            }
+            else
+                return true;
+        }
     }
 
     private void createOscClient() {

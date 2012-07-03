@@ -25,6 +25,7 @@ public class OSCDiscover {
     public static final int    DEFAULT_MULTICAST_PORT = 12421;
     public static final String PING = "VIP_Ping";
     public static final String PONG = "VIP_Pong";
+    public static final String PONG_VER = "VIP_Pong_02";
     public static final int    DEFAULT_TIMEOUT = 1000;
 
     public OSCDiscover(Context context, String host, int port) {
@@ -42,8 +43,13 @@ public class OSCDiscover {
         WifiManager mgr = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
         return mgr.setWifiEnabled(true);
     }
+    
+    public enum HandshakeResult {
+    	NO_PONG, OLD_VERSION, OK
+    }
 
-    public static boolean checkHandshake(String host, int port) {
+    public static HandshakeResult checkHandshake(String host, int port) {
+    	HandshakeResult result = HandshakeResult.NO_PONG;
         try {
             InetAddress addr = InetAddress.getByName(host);
             DatagramSocket socket = new DatagramSocket(port);
@@ -52,7 +58,7 @@ public class OSCDiscover {
             DatagramPacket packet = new DatagramPacket(byteArray, byteArray.length, addr, port);
             socket.send(packet);
             // listen for pong
-            byteArray = new byte[PONG.length()];
+            byteArray = new byte[PONG_VER.length()];
             packet = new DatagramPacket(byteArray, byteArray.length);
             socket.setSoTimeout(DEFAULT_TIMEOUT);
             try {
@@ -64,12 +70,17 @@ public class OSCDiscover {
                 socket.close();
             }
             String response = new String(packet.getData());
-            return response.equals(PONG);
+            // check for pong response
+            if (response.substring(0, PONG.length()).equals(PONG))
+            	result = HandshakeResult.OLD_VERSION;
+            // check for current version
+            if (response.equals(PONG_VER))
+            	result = HandshakeResult.OK;            		
         }
         catch (IOException e) {
             Log.e(TAG, "checkHandshake: IOException");
         }
-        return false;
+        return result;
     }
 
     public String multicastPing() {
