@@ -128,7 +128,6 @@ public class TrackpadView extends TouchView {
     }
 
     private StateFunction idle = new StateFunction() {
-        @Override
         public void function(int sig) {
             if (sig == SIG_TOUCH_DOWN0) {
                 if (showButtons && GeometryHelper.AnyPointInBounds(pts, buttonLeft)) {
@@ -151,7 +150,6 @@ public class TrackpadView extends TouchView {
     };
 
     private StateFunction touch_down = new StateFunction() {
-        @Override
         public void function(int sig) {
             if (sig == SIG_TOUCH_MOVE0) {
                 float dx = pts[0].x - initialX0;
@@ -175,7 +173,6 @@ public class TrackpadView extends TouchView {
     };
 
     private StateFunction touch_dragging = new StateFunction() {
-        @Override
         public void function(int sig) {
             if (sig == SIG_TOUCH_MOVE0)
                 performEvent(false, 0,
@@ -188,7 +185,6 @@ public class TrackpadView extends TouchView {
     };
 
     private StateFunction tap_release = new StateFunction() {
-        @Override
         public void function(int sig) {
             if (sig == SIG_TOUCH_DOWN0) {
                 purgeTapTimer();
@@ -209,7 +205,6 @@ public class TrackpadView extends TouchView {
     };
 
     private StateFunction double_tap = new StateFunction() {
-        @Override
         public void function(int sig) {
             if (sig == SIG_TOUCH_MOVE0) {
                 float dx = pts[0].x - initialX0;
@@ -231,7 +226,6 @@ public class TrackpadView extends TouchView {
     };
 
     private StateFunction double_tap_drag = new StateFunction() {
-        @Override
         public void function(int sig) {
             if (sig == SIG_TOUCH_MOVE0) {
                 performEvent(false, 1,
@@ -246,7 +240,6 @@ public class TrackpadView extends TouchView {
     };
 
     private StateFunction double_tap_wait = new StateFunction() {
-        @Override
         public void function(int sig) {
             if (sig == SIG_TOUCH_DOWN0) {
                 purgeTapTimer();
@@ -260,7 +253,6 @@ public class TrackpadView extends TouchView {
     };
 
     private StateFunction two_touch = new StateFunction() {
-        @Override
         public void function(int sig) {
             switch (sig) {
             case SIG_TOUCH_MOVE0:
@@ -286,7 +278,6 @@ public class TrackpadView extends TouchView {
     };
 
     private StateFunction scrolling = new StateFunction() {
-        @Override
         public void function(int sig) {
             switch (sig) {
             case SIG_TOUCH_MOVE0:
@@ -303,7 +294,6 @@ public class TrackpadView extends TouchView {
     };
 
     private StateFunction two_touch_dead = new StateFunction() {
-        @Override
         public void function(int sig) {
             switch (sig) {
             case SIG_TOUCH_UP0:
@@ -315,7 +305,6 @@ public class TrackpadView extends TouchView {
     };
 
     private StateFunction button_click = new StateFunction() {
-        @Override
         public void function(int sig) {
             if (sig == SIG_TOUCH_UP0) {
                 buttonLeftDepressed = false;

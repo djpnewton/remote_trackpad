@@ -54,14 +54,11 @@ public class SoftKeyboard
         kbdView.setVisibility(View.VISIBLE);
     }
 
-    @Override
     public void onPress(int primaryCode) {
     }
-    @Override
     public void onRelease(int primaryCode) {
     }
 
-    @Override
     public void onKey(int primaryCode, int[] keyCodes) {
         if (primaryCode == Keyboard.KEYCODE_DELETE) {
             sendCode(primaryCode);
@@ -142,23 +139,18 @@ public class SoftKeyboard
         }
     }
 
-    @Override
     public void onText(CharSequence text) {
     }
 
-    @Override
     public void swipeRight() {
     }
 
-    @Override
     public void swipeLeft() {
     }
 
-    @Override
     public void swipeUp() {
     }
 
-    @Override
     public void swipeDown() {
     }
 }

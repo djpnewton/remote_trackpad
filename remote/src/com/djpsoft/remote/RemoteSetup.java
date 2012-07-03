@@ -57,43 +57,36 @@ public class RemoteSetup extends Activity {
         loadPrefs();
 
         cbTapToClick.setOnCheckedChangeListener(new OnCheckedChangeListener() {
-            @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 savePrefs();
             }
         });
         cbDoubleTapAndDrag.setOnCheckedChangeListener(new OnCheckedChangeListener() {
-            @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 savePrefs();
             }
         });
         cbTwoFingerTapRightClick.setOnCheckedChangeListener(new OnCheckedChangeListener() {
-            @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 savePrefs();
             }
         });
         cbTwoFingerDragScroll.setOnCheckedChangeListener(new OnCheckedChangeListener() {
-            @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 savePrefs();
             }
         });
         cbShowButtons.setOnCheckedChangeListener(new OnCheckedChangeListener() {
-            @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 savePrefs();
             }
         });
         cbHandshakeFirst.setOnCheckedChangeListener(new OnCheckedChangeListener() {
-            @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 savePrefs();
             }
         });
         cbLandscape.setOnCheckedChangeListener(new OnCheckedChangeListener() {
-            @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 savePrefs();
             }
@@ -197,7 +190,6 @@ public class RemoteSetup extends Activity {
                     final Button btnEnableWifi = (Button) findViewById(R.id.enable_wifi);
                     btnEnableWifi.setVisibility(View.VISIBLE);
                     btnEnableWifi.setOnClickListener(new View.OnClickListener() {
-                        @Override
                         public void onClick(View v) {
                             if (discover.enableWifi())
                                 btnEnableWifi.setVisibility(View.GONE);

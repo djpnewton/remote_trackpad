@@ -164,7 +164,6 @@ public class TrackpadActivity extends Activity {
         View view = inflater.inflate(R.layout.kbd, null);
         KeyboardView kbdView = (KeyboardView) view.findViewById(R.id.kbd);
         kbd = new SoftKeyboard(this, kbdView, new SoftKeyboard.CloseKeyboardListener() {
-            @Override
             public void function() {
                 toggleView();
             }
