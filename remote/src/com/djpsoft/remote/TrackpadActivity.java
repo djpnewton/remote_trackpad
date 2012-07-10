@@ -27,6 +27,7 @@ public class TrackpadActivity extends Activity {
     public static final String LANDSCAPE = "LANDSCAPE";
 
     private boolean keyboardVisible = false;
+    @SuppressWarnings("unused")
     private SoftKeyboard kbd;
 
     private boolean tapToClick = false;

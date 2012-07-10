@@ -52,13 +52,17 @@ public class TrackpadView extends TouchView {
     private boolean lastPt0Valid = false;
     private boolean lastPt1Valid = false;
     private float lastX0, lastY0;
+    @SuppressWarnings("unused")
     private float lastX1, lastY1;
     private float initialX0, initialY0;
+    @SuppressWarnings("unused")
     private float initialX1, initialY1;
     private Timer tapTimer = null;
 
     private boolean buttonLeftDepressed, buttonRightDepressed;
     private RectF trackPad, buttonLeft, buttonRight;
+
+    private Paint p = new Paint();
 
     public TrackpadView(Context context, boolean tapToClick, boolean doubleTapAndDrag, boolean twoFingerTapRightClick, boolean twoFingerDragScroll, boolean showButtons) {
         super(context);
@@ -362,9 +366,6 @@ public class TrackpadView extends TouchView {
     @Override
     public void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-
-        Paint p = new Paint();
-
         // draw mouse buttons
         if (showButtons) {
             p.setColor(0xFFFFFFFF);
