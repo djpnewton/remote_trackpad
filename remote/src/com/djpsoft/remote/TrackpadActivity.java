@@ -15,10 +15,6 @@ import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
 import android.widget.Toast;
 
-import com.google.ads.AdRequest;
-import com.google.ads.AdSize;
-import com.google.ads.AdView;
-
 public class TrackpadActivity extends Activity {
 
     private static final String TAG = "TrackpadActivity";
@@ -143,16 +139,9 @@ public class TrackpadActivity extends Activity {
     }
 
     private View createViewContainer(View mainView) {
-        LinearLayout ll = new LinearLayout(this);
-        AdView adView = new AdView(this, AdSize.BANNER, getString(R.string.ad_id));
-        adView.setLayoutParams(new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
-        ll.addView(adView);
-        ll.setOrientation(LinearLayout.VERTICAL);
         mainView.setLayoutParams(new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT, 1));
-        ll.addView(mainView);
-        setContentView(ll);
-        adView.loadAd(new AdRequest());
-        return ll;
+        setContentView(mainView);
+        return mainView;
     }
 
     private void setupMouseView() {

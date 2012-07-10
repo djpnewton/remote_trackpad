@@ -127,21 +127,20 @@ containing a value of this type.
         public static final int title_row_bkgnd=0x7f020011;
     }
     public static final class id {
-        public static final int ad_view=0x7f080001;
-        public static final int double_tap_and_drag=0x7f080004;
-        public static final int enable_wifi=0x7f08000c;
-        public static final int go_gamepad=0x7f08000e;
-        public static final int go_testtouch=0x7f08000d;
-        public static final int go_trackpad=0x7f080002;
-        public static final int handshake_first=0x7f080009;
-        public static final int hostname=0x7f08000a;
+        public static final int double_tap_and_drag=0x7f080003;
+        public static final int enable_wifi=0x7f08000b;
+        public static final int go_gamepad=0x7f08000d;
+        public static final int go_testtouch=0x7f08000c;
+        public static final int go_trackpad=0x7f080001;
+        public static final int handshake_first=0x7f080008;
+        public static final int hostname=0x7f080009;
         public static final int kbd=0x7f080000;
-        public static final int landscape=0x7f080008;
-        public static final int send_ping=0x7f08000b;
-        public static final int show_buttons=0x7f080007;
-        public static final int tap_to_click=0x7f080003;
-        public static final int two_finger_drag_scroll=0x7f080006;
-        public static final int two_finger_tap_right_click=0x7f080005;
+        public static final int landscape=0x7f080007;
+        public static final int send_ping=0x7f08000a;
+        public static final int show_buttons=0x7f080006;
+        public static final int tap_to_click=0x7f080002;
+        public static final int two_finger_drag_scroll=0x7f080005;
+        public static final int two_finger_tap_right_click=0x7f080004;
     }
     public static final class layout {
         public static final int kbd=0x7f030000;
